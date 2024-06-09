@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>チョコレート商品 | Amazon</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>チョコレート商品</h1>
+        <a href="amazon.html" class="back-button">ホームに戻る</a>
+    </header>
+    <div class="container">
+        <h2>チョコレート製品紹介</h2>
+        <div class="product-grid" id="choco-product-grid">
+            <!-- 製品情報はJavaScriptで挿入 -->
+        </div>
+        <div class="pagination">
+            <button onclick="showPage(1)" id="page1" class="page-button">1</button>
+            <button onclick="showPage(2)" id="page2" class="page-button">2</button>
+            <button onclick="showPage(3)" id="page3" class="page-button">3</button>
+        </div>
+    </div>
+    <script>
+        const chocoProducts = [
+            {
+                img: 'https://m.media-amazon.com/images/I/71Q0DAynPqL._AC_UL320_.jpg',
+                name: 'ミルクチョコレート 10個セット',
+                price: '800円',
+                weight: '150g',
+                desc: '濃厚なミルクチョコレート。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/71Q0DAynPqL._AC_UL320_.jpg',
+                name: 'ダークチョコレート 8個入り',
+                price: '900円',
+                weight: '200g',
+                desc: 'ビターな味わいのダークチョコレート。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/71Q0DAynPqL._AC_UL320_.jpg',
+                name: 'ホワイトチョコレート 15個パック',
+                price: '1000円',
+                weight: '250g',
+                desc: '甘いホワイトチョコレート。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/71Q0DAynPqL._AC_UL320_.jpg',
+                name: 'ヘーゼルナッツチョコ 6個セット',
+                price: '600円',
+                weight: '180g',
+                desc: 'ヘーゼルナッツ入りチョコレート。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/71Q0DAynPqL._AC_UL320_.jpg',
+                name: 'ストロベリーチョコ 10個パック',
+                price: '850円',
+                weight: '220g',
+                desc: 'ストロベリー風味のチョコレート。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/71Q0DAynPqL._AC_UL320_.jpg',
+                name: 'ミントチョコレート 8個セット',
+                price: '750円',
+                weight: '160g',
+                desc: 'さわやかなミント味のチョコレート。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/71Q0DAynPqL._AC_UL320_.jpg',
+                name: 'オレンジチョコレート 12個入り',
+                price: '950円',
+                weight: '240g',
+                desc: 'オレンジの風味が楽しめるチョコレート。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/71Q0DAynPqL._AC_UL320_.jpg',
+                name: 'コーヒーチョコレート 6個パック',
+                price: '700円',
+                weight: '180g',
+                desc: 'コーヒー風味のチョコレート。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/71Q0DAynPqL._AC_UL320_.jpg',
+                name: 'クランチチョコレート 10個セット',
+                price: '900円',
+                weight: '200g',
+                desc: 'サクサクのクランチチョコレート。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/71Q0DAynPqL._AC_UL320_.jpg',
+                name: 'キャラメルチョコレート 8個入り',
+                price: '850円',
+                weight: '210g',
+                desc: 'キャラメル入りのチョコレート。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/71Q0DAynPqL._AC_UL320_.jpg',
+                name: 'ナッツチョコレート 15個パック',
+                price: '1100円',
+                weight: '260g',
+                desc: 'ナッツがたっぷり入ったチョコレート。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/71Q0DAynPqL._AC_UL320_.jpg',
+                name: 'ラムレーズンチョコ 10個セット',
+                price: '950円',
+                weight: '200g',
+                desc: 'ラムレーズン入りのチョコレート。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            }
+        ];
+
+        function showPage(page) {
+            const chocoProductGrid = document.getElementById('choco-product-grid');
+            chocoProductGrid.innerHTML = '';
+            const startIndex = (page - 1) * 16;
+            const endIndex = startIndex + 16;
+            const productsToShow = chocoProducts.slice(startIndex, endIndex);
+            
+            productsToShow.forEach(product => {
+                const productElement = document.createElement('div');
+                productElement.className = 'product';
+                productElement.innerHTML = `
+                    <img src="${product.img}" alt="${product.name}">
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p class="price">${product.price}</p>
+                        <p class="weight">${product.weight}</p>
+                        <p>${product.desc}</p>
+                    </div>
+                    <a href="${product.link}" class="buy-button">Amazonに向かう</a>
+                `;
+                chocoProductGrid.appendChild(productElement);
+            });
+
+            // ページボタンのアクティブ状態を更新
+            document.querySelectorAll('.page-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            document.getElementById(`page${page}`).classList.add('active');
+        }
+
+        // 初期表示として1ページ目を表示
+        document.addEventListener('DOMContentLoaded', () => {
+            showPage(1);
+        });
+    </script>
+</body>
+</html>

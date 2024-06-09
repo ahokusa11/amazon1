@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>冷凍商品 | Amazon</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>冷凍商品</h1>
+        <a href="amazon.html" class="back-button">ホームに戻る</a>
+    </header>
+    <div class="container">
+        <h2>冷凍製品紹介</h2>
+        <div class="product-grid" id="frozen-product-grid">
+            <!-- 製品情報はJavaScriptで挿入 -->
+        </div>
+        <div class="pagination">
+            <button onclick="showPage(1)" id="page1" class="page-button">1</button>
+            <button onclick="showPage(2)" id="page2" class="page-button">2</button>
+            <button onclick="showPage(3)" id="page3" class="page-button">3</button>
+        </div>
+    </div>
+    <script>
+        const frozenProducts = [
+            {
+                img: 'https://m.media-amazon.com/images/I/81cev6KONvL._AC_UY436_FMwebp_QL65_.jpg',
+                name: '冷凍ピザ 4枚入り',
+                price: '1200円',
+                weight: '800g',
+                desc: '冷凍庫で長持ちする美味しいピザ。',
+                link: 'https://www.amazon.co.jp/%E3%80%8C%E5%86%B7%E5%87%8D%E3%80%8D-%E3%83%8B%E3%83%83%E3%82%B9%E3%82%A4-%E3%81%9F%E3%81%93%E7%84%BC%E3%81%8D-16%E5%80%8B-%C3%974%E5%80%8B/dp/B0CHVDWTBY/ref=pd_sbs_d_sccl_3_4/358-6043858-1438869?pd_rd_w=THBsL&content-id=amzn1.sym.e146c92a-7981-4c58-8351-e2a023395915&pf_rd_p=e146c92a-7981-4c58-8351-e2a023395915&pf_rd_r=HV1GB6QD3MJV7AETKN2R&pd_rd_wg=YWttu&pd_rd_r=4d9cc924-3553-4844-8d00-f2ca8678ced0&pd_rd_i=B0CHVDWTBY&psc=1'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/81cev6KONvL._AC_UY436_FMwebp_QL65_.jpg',
+                name: '冷凍フライドポテト 2kg',
+                price: '1500円',
+                weight: '2000g',
+                desc: '揚げるだけで簡単に美味しいフライドポテト。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/81cev6KONvL._AC_UY436_FMwebp_QL65_.jpg',
+                name: '冷凍海鮮ミックス 1kg',
+                price: '1800円',
+                weight: '1000g',
+                desc: '様々な料理に使える冷凍海鮮ミックス。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/81cev6KONvL._AC_UY436_FMwebp_QL65_.jpg',
+                name: '冷凍野菜ミックス 1.5kg',
+                price: '1300円',
+                weight: '1500g',
+                desc: '手軽に栄養が取れる冷凍野菜ミックス。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/81cev6KONvL._AC_UY436_FMwebp_QL65_.jpg',
+                name: '冷凍焼きおにぎり 10個入り',
+                price: '800円',
+                weight: '500g',
+                desc: '手軽に楽しめる焼きおにぎり。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/81cev6KONvL._AC_UY436_FMwebp_QL65_.jpg',
+                name: '冷凍たこ焼き 50個入り',
+                price: '1000円',
+                weight: '1000g',
+                desc: '手軽に楽しめる美味しい冷凍たこ焼き。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/81cev6KONvL._AC_UY436_FMwebp_QL65_.jpg',
+                name: '冷凍うどん 5玉入り',
+                price: '700円',
+                weight: '1000g',
+                desc: '簡単に調理できる冷凍うどん。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/81cev6KONvL._AC_UY436_FMwebp_QL65_.jpg',
+                name: '冷凍餃子 30個入り',
+                price: '900円',
+                weight: '600g',
+                desc: '美味しい冷凍餃子。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/81cev6KONvL._AC_UY436_FMwebp_QL65_.jpg',
+                name: '冷凍焼きおにぎり 10個入り',
+                price: '800円',
+                weight: '500g',
+                desc: '手軽に楽しめる焼きおにぎり。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/81cev6KONvL._AC_UY436_FMwebp_QL65_.jpg',
+                name: '冷凍焼きおにぎり 10個入り',
+                price: '800円',
+                weight: '500g',
+                desc: '手軽に楽しめる焼きおにぎり。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/81cev6KONvL._AC_UY436_FMwebp_QL65_.jpg',
+                name: '冷凍焼きおにぎり 10個入り',
+                price: '800円',
+                weight: '500g',
+                desc: '手軽に楽しめる焼きおにぎり。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/81cev6KONvL._AC_UY436_FMwebp_QL65_.jpg',
+                name: '冷凍焼きおにぎり 10個入り',
+                price: '800円',
+                weight: '500g',
+                desc: '手軽に楽しめる焼きおにぎり。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            }
+        ];
+
+        function showPage(page) {
+            const frozenProductGrid = document.getElementById('frozen-product-grid');
+            frozenProductGrid.innerHTML = '';
+            const startIndex = (page - 1) * 16;
+            const endIndex = startIndex + 16;
+            const productsToShow = frozenProducts.slice(startIndex, endIndex);
+            
+            productsToShow.forEach(product => {
+                const productElement = document.createElement('div');
+                productElement.className = 'product';
+                productElement.innerHTML = `
+                    <img src="${product.img}" alt="${product.name}">
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p class="price">${product.price}</p>
+                        <p class="weight">${product.weight}</p>
+                        <p>${product.desc}</p>
+                    </div>
+                    <a href="${product.link}" class="buy-button">Amazonに向かう</a>
+                `;
+                frozenProductGrid.appendChild(productElement);
+            });
+
+            // ページボタンのアクティブ状態を更新
+            document.querySelectorAll('.page-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            document.getElementById(`page${page}`).classList.add('active');
+        }
+
+        // 初期表示として1ページ目を表示
+        document.addEventListener('DOMContentLoaded', () => {
+            showPage(1);
+        });
+    </script>
+</body>
+</html>
+

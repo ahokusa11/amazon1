@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>お菓子系 | Amazon</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>お菓子系</h1>
+        <button class="lottery-button" onclick="tryLottery()">Amazon500円コード入手</button>
+        <p id="attempt-count">挑戦回数: <span id="attempts">0</span> / 100</p>
+    </header>
+    <div class="container">
+        <div class="subcategory-box">
+            <a href="#potato" class="subcategory-link">
+                <div class="subcategory">
+                    <img src="https://m.media-amazon.com/images/I/51wPDXV9PPL._AC_UY436_FMwebp_QL65_.jpg" alt="ポテト">
+                    <h2>ポテト</h2>
+                </div>
+            </a>
+            <a href="#jelly" class="subcategory-link">
+                <div class="subcategory">
+                    <img src="https://m.media-amazon.com/images/I/71WPZ12hMXS._AC_UY436_FMwebp_QL65_.jpg" alt="ゼリー">
+                    <h2>ゼリー</h2>
+                </div>
+            </a>
+            <a href="#chocolate" class="subcategory-link">
+                <div class="subcategory">
+                    <img src="https://m.media-amazon.com/images/I/51ymjBCC8jL._AC_UY436_FMwebp_QL65_.jpg" alt="チョコ">
+                    <h2>チョコ</h2>
+                </div>
+            </a>
+            <a href="#gum" class="subcategory-link">
+                <div class="subcategory">
+                    <img src="https://m.media-amazon.com/images/I/717Bv--d3rL._AC_UY436_FMwebp_QL65_.jpg" alt="チューインガム">
+                    <h2>チューインガム</h2>
+                </div>
+            </a>
+            <a href="#reito" class="subcategory-link">
+                <div class="subcategory">
+                    <img src="https://m.media-amazon.com/images/I/81cev6KONvL._AC_UY436_FMwebp_QL65_.jpg" alt="冷凍">
+                    <h2>冷凍</h2>
+                </div>
+            </a>
+        </div>
+
+        <h2>ポテト製品紹介</h2>
+        <div class="product-grid" id="product-grid">
+            <!-- 製品情報はJavaScriptで挿入 -->
+        </div>
+
+        <div class="pagination">
+            <a href="#" class="page-button" onclick="showPage(1)">1</a>
+            <a href="#" class="page-button" onclick="showPage(2)">2</a>
+            <a href="#" class="page-button" onclick="showPage(3)">3</a>
+            <a href="#" class="page-button" onclick="showPage(4)">4</a>
+            <a href="#" class="page-button" onclick="showPage(5)">5</a>
+        </div>
+    </div>
+    <script>
+        const products = [
+            // 1ページ目の製品
+            {
+                img: 'https://m.media-amazon.com/images/I/81BOb5AtrCL._AC_SX679_PIbundle-12,TopRight,0,0_SH20_.jpg',
+                name: 'ピザポテト 12袋',
+                price: '1500円',
+                weight: '60g ✖ 12袋',
+                desc: '1日ニートの私は3袋食べて4日か5日もつ12袋1500円前後でとても安いセブンとかよく行くのでお菓子食べたい欲がピザポテト1500円で抑えられて無駄使いが減ります。',
+                link: 'https://www.amazon.co.jp/dp/B0BBW2FNPV/ref=sr_1_6?crid=3BQMEFQ0CRHFA&keywords=%E3%83%94%E3%82%B6%E3%83%9D%E3%83%86%E3%83%88&qid=1717613701&sprefix=%E3%83%94%E3%82%B6%2Caps%2C176&sr=8-6'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/51kHL-ssj8L._AC_UF480,480_SR480,480_.jpg',
+                name: 'じゃがりこ 10袋',
+                price: '1000円',
+                weight: '58g ✖ 10袋',
+                desc: 'サクサク食感が美味しいじゃがりこ。10袋で1000円とお得です。',
+                link: 'https://www.amazon.co.jp/dp/B07QY8T8XV?tag=youraffiliateid-22'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/812i9X-deRL._AC_UL640_FMwebp_QL65_.jpg',
+                name: '堅あげポテト 12袋',
+                price: '1800円',
+                weight: '65g ✖ 12袋',
+                desc: 'しっかりとした食感の堅あげポテト。12袋で1800円です。',
+                link: 'https://www.amazon.co.jp/dp/B07QY8T8XV?tag=youraffiliateid-22'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/71acq8p0RHL.__AC_SX300_SY300_QL70_ML2_.jpg',
+                name: 'ポテトチップス 24袋',
+                price: '2000円',
+                weight: '50g ✖ 24袋',
+                desc: '定番のポテトチップス。24袋で2000円と大容量です。',
+                link: 'https://www.amazon.co.jp/dp/B07QY8T8XV?tag=youraffiliateid-22'
+            },
+            // 2ページ目の製品
+            {
+                img: 'https://m.media-amazon.com/images/I/71WPZ12hMXS._AC_UY436_FMwebp_QL65_.jpg',
+                name: 'ポテト製品1',
+                price: '1200円',
+                weight: '50g ✖ 12袋',
+                desc: '美味しいポテト製品1。12袋で1200円です。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T?tag=youraffiliateid-22'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/51ymjBCC8jL._AC_UY436_FMwebp_QL65_.jpg',
+                name: 'ポテト製品2',
+                price: '1300円',
+                weight: '60g ✖ 12袋',
+                desc: '美味しいポテト製品2。12袋で1300円です。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T?tag=youraffiliateid-22'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/717Bv--d3rL._AC_UY436_FMwebp_QL65_.jpg',
+                name: 'ポテト製品3',
+                price: '1400円',
+                weight: '70g ✖ 12袋',
+                desc: '美味しいポテト製品3。12袋で1400円です。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T?tag=youraffiliateid-22'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/81cev6KONvL._AC_UY436_FMwebp_QL65_.jpg',
+                name: 'ポテト製品4',
+                price: '1500円',
+                weight: '80g ✖ 12袋',
+                desc: '美味しいポテト製品4。12袋で1500円です。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T?tag=youraffiliateid-22'
+            },
+            // 3ページ目の製品
+            {
+                img: 'https://m.media-amazon.com/images/I/81BOb5AtrCL._AC_SX679_PIbundle-12,TopRight,0,0_SH20_.jpg',
+                name: 'ポテト製品5',
+                price: '1600円',
+                weight: '60g ✖ 12袋',
+                desc: '美味しいポテト製品5。12袋で1600円です。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T?tag=youraffiliateid-22'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/51kHL-ssj8L._AC_UF480,480_SR480,480_.jpg',
+                name: 'ポテト製品6',
+                price: '1700円',
+                weight: '58g ✖ 10袋',
+                desc: '美味しいポテト製品6。10袋で1700円です。',
+                link: 'https://www.amazon.co.jp/dp/B07QY8T8XV?tag=youraffiliateid-22'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/812i9X-deRL._AC_UL640_FMwebp_QL65_.jpg',
+                name: 'ポテト製品7',
+                price: '1800円',
+                weight: '65g ✖ 12袋',
+                desc: '美味しいポテト製品7。12袋で1800円です。',
+                link: 'https://www.amazon.co.jp/dp/B07QY8T8XV?tag=youraffiliateid-22'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/71acq8p0RHL.__AC_SX300_SY300_QL70_ML2_.jpg',
+                name: 'ポテト製品8',
+                price: '1900円',
+                weight: '50g ✖ 24袋',
+                desc: '美味しいポテト製品8。24袋で1900円です。',
+                link: 'https://www.amazon.co.jp/dp/B07QY8T8XV?tag=youraffiliateid-22'
+            },
+            // 4ページ目の製品
+            {
+                img: 'https://m.media-amazon.com/images/I/71WPZ12hMXS._AC_UY436_FMwebp_QL65_.jpg',
+                name: 'ポテト製品9',
+                price: '2000円',
+                weight: '50g ✖ 12袋',
+                desc: '美味しいポテト製品9。12袋で2000円です。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T?tag=youraffiliateid-22'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/51ymjBCC8jL._AC_UY436_FMwebp_QL65_.jpg',
+                name: 'ポテト製品10',
+                price: '2100円',
+                weight: '60g ✖ 12袋',
+                desc: '美味しいポテト製品10。12袋で2100円です。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T?tag=youraffiliateid-22'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/717Bv--d3rL._AC_UY436_FMwebp_QL65_.jpg',
+                name: 'ポテト製品11',
+                price: '2200円',
+                weight: '70g ✖ 12袋',
+                desc: '美味しいポテト製品11。12袋で2200円です。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T?tag=youraffiliateid-22'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/81cev6KONvL._AC_UY436_FMwebp_QL65_.jpg',
+                name: 'ポテト製品12',
+                price: '2300円',
+                weight: '80g ✖ 12袋',
+                desc: '美味しいポテト製品12。12袋で2300円です。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T?tag=youraffiliateid-22'
+            },
+            // 5ページ目の製品
+            {
+                img: 'https://m.media-amazon.com/images/I/81BOb5AtrCL._AC_SX679_PIbundle-12,TopRight,0,0_SH20_.jpg',
+                name: 'ポテト製品13',
+                price: '2400円',
+                weight: '60g ✖ 12袋',
+                desc: '美味しいポテト製品13。12袋で2400円です。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T?tag=youraffiliateid-22'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/51kHL-ssj8L._AC_UF480,480_SR480,480_.jpg',
+                name: 'ポテト製品14',
+                price: '2500円',
+                weight: '58g ✖ 10袋',
+                desc: '美味しいポテト製品14。10袋で2500円です。',
+                link: 'https://www.amazon.co.jp/dp/B07QY8T8XV?tag=youraffiliateid-22'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/812i9X-deRL._AC_UL640_FMwebp_QL65_.jpg',
+                name: 'ポテト製品15',
+                price: '2600円',
+                weight: '65g ✖ 12袋',
+                desc: '美味しいポテト製品15。12袋で2600円です。',
+                link: 'https://www.amazon.co.jp/dp/B07QY8T8XV?tag=youraffiliateid-22'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/71acq8p0RHL.__AC_SX300_SY300_QL70_ML2_.jpg',
+                name: 'ポテト製品16',
+                price: '2700円',
+                weight: '50g ✖ 24袋',
+                desc: '美味しいポテト製品16。24袋で2700円です。',
+                link: 'https://www.amazon.co.jp/dp/B07QY8T8XV?tag=youraffiliateid-22'
+            }
+        ];
+
+        const productsPerPage = 4;
+
+        function showPage(page) {
+            const productGrid = document.getElementById('product-grid');
+            productGrid.innerHTML = '';
+            const start = (page - 1) * productsPerPage;
+            const end = start + productsPerPage;
+            const productsToShow = products.slice(start, end);
+            
+            productsToShow.forEach(product => {
+                const productElement = document.createElement('div');
+                productElement.className = 'product';
+                productElement.innerHTML = `
+                    <img src="${product.img}" alt="${product.name}">
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p class="price">${product.price}</p>
+                        <p class="weight">${product.weight}</p>
+                        <p>${product.desc}</p>
+                    </div>
+                    <a href="${product.link}" class="buy-button">Amazonに向かう</a>
+                `;
+                productGrid.appendChild(productElement);
+            });
+
+            // ページボタンの更新
+            const pageButtons = document.querySelectorAll('.page-button');
+            pageButtons.forEach(button => {
+                if (button.textContent == page) {
+                    button.classList.add('active');
+                } else {
+                    button.classList.remove('active');
+                }
+            });
+        }
+
+        function tryLottery() {
+            let attempts = localStorage.getItem('attempts') || 0;
+            attempts++;
+            localStorage.setItem('attempts', attempts);
+            document.getElementById('attempts').textContent = attempts;
+
+            const randomNumber = Math.floor(Math.random() * 100) + 1;
+            if (randomNumber === 1) {
+                window.location.href = 'winner.html';
+            } else {
+                alert('残念！今回はハズレです。もう一度挑戦してみてください。');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const attempts = localStorage.getItem('attempts') || 0;
+            document.getElementById('attempts').textContent = attempts;
+            showPage(1);  // 初期表示は1ページ目
+        });
+    </script>
+</body>
+</html>

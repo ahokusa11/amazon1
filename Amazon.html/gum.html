@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ガム商品 | Amazon</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>ガム商品</h1>
+        <a href="amazon.html" class="back-button">ホームに戻る</a>
+    </header>
+    <div class="container">
+        <h2>ガム製品紹介</h2>
+        <div class="product-grid" id="gum-product-grid">
+            <!-- 製品情報はJavaScriptで挿入 -->
+        </div>
+        <div class="pagination">
+            <button onclick="showPage(1)" id="page1" class="page-button">1</button>
+            <button onclick="showPage(2)" id="page2" class="page-button">2</button>
+            <button onclick="showPage(3)" id="page3" class="page-button">3</button>
+        </div>
+    </div>
+    <script>
+        const gumProducts = [
+            {
+                img: 'https://m.media-amazon.com/images/I/717Bv--d3rL._AC_UY436_FMwebp_QL65_.jpg',
+                name: 'ミントガム 10個セット',
+                price: '500円',
+                weight: '150g',
+                desc: 'リフレッシュできるミントガム。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/717Bv--d3rL._AC_UY436_FMwebp_QL65_.jpg',
+                name: 'フルーツガム 12個入り',
+                price: '600円',
+                weight: '200g',
+                desc: 'フルーツの味が楽しめるガム。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/717Bv--d3rL._AC_UY436_FMwebp_QL65_.jpg',
+                name: 'シュガーレスガム 15個パック',
+                price: '700円',
+                weight: '250g',
+                desc: 'カロリーを気にせず楽しめるガム。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/717Bv--d3rL._AC_UY436_FMwebp_QL65_.jpg',
+                name: 'コーヒーガム 8個入り',
+                price: '400円',
+                weight: '120g',
+                desc: 'コーヒー風味のガム。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/717Bv--d3rL._AC_UY436_FMwebp_QL65_.jpg',
+                name: 'ミックスガム 20個セット',
+                price: '1000円',
+                weight: '300g',
+                desc: '様々な味が楽しめるミックスガム。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/717Bv--d3rL._AC_UY436_FMwebp_QL65_.jpg',
+                name: 'スパイシーガム 5個セット',
+                price: '300円',
+                weight: '100g',
+                desc: 'スパイシーな味わいのガム。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/717Bv--d3rL._AC_UY436_FMwebp_QL65_.jpg',
+                name: 'ベリーガム 12個パック',
+                price: '600円',
+                weight: '200g',
+                desc: 'ベリーの風味が楽しめるガム。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/717Bv--d3rL._AC_UY436_FMwebp_QL65_.jpg',
+                name: 'トロピカルガム 10個セット',
+                price: '500円',
+                weight: '150g',
+                desc: 'トロピカルな味が楽しめるガム。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/717Bv--d3rL._AC_UY436_FMwebp_QL65_.jpg',
+                name: 'シトラスガム 8個入り',
+                price: '400円',
+                weight: '120g',
+                desc: 'シトラス風味のガム。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/717Bv--d3rL._AC_UY436_FMwebp_QL65_.jpg',
+                name: 'チョコレートガム 6個パック',
+                price: '450円',
+                weight: '130g',
+                desc: 'チョコレート風味のガム。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/717Bv--d3rL._AC_UY436_FMwebp_QL65_.jpg',
+                name: 'ハーブガム 10個セット',
+                price: '550円',
+                weight: '150g',
+                desc: 'ハーブの香りが楽しめるガム。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/717Bv--d3rL._AC_UY436_FMwebp_QL65_.jpg',
+                name: 'ミルクガム 7個入り',
+                price: '350円',
+                weight: '110g',
+                desc: 'ミルク風味のガム。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            }
+        ];
+
+        function showPage(page) {
+            const gumProductGrid = document.getElementById('gum-product-grid');
+            gumProductGrid.innerHTML = '';
+            const startIndex = (page - 1) * 16;
+            const endIndex = startIndex + 16;
+            const productsToShow = gumProducts.slice(startIndex, endIndex);
+            
+            productsToShow.forEach(product => {
+                const productElement = document.createElement('div');
+                productElement.className = 'product';
+                productElement.innerHTML = `
+                    <img src="${product.img}" alt="${product.name}">
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p class="price">${product.price}</p>
+                        <p class="weight">${product.weight}</p>
+                        <p>${product.desc}</p>
+                    </div>
+                    <a href="${product.link}" class="buy-button">Amazonに向かう</a>
+                `;
+                gumProductGrid.appendChild(productElement);
+            });
+
+            // ページボタンのアクティブ状態を更新
+            document.querySelectorAll('.page-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            document.getElementById(`page${page}`).classList.add('active');
+        }
+
+        // 初期表示として1ページ目を表示
+        document.addEventListener('DOMContentLoaded', () => {
+            showPage(1);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ゼリー商品 | Amazon</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>ゼリー商品</h1>
+        <a href="amazon.html" class="back-button">ホームに戻る</a>
+    </header>
+    <div class="container">
+        <h2>ゼリー製品紹介</h2>
+        <div class="product-grid" id="jelly-product-grid">
+            <!-- 製品情報はJavaScriptで挿入 -->
+        </div>
+        <div class="pagination">
+            <button onclick="showPage(1)" id="page1" class="page-button">1</button>
+            <button onclick="showPage(2)" id="page2" class="page-button">2</button>
+            <button onclick="showPage(3)" id="page3" class="page-button">3</button>
+        </div>
+    </div>
+    <script>
+        const jellyProducts = [
+            {
+                img: 'https://m.media-amazon.com/images/I/81QpkIctqPL._AC_UL320_.jpg',
+                name: 'フルーツゼリー 10個セット',
+                price: '1000円',
+                weight: '200g',
+                desc: '美味しいフルーツゼリーです。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/81QpkIctqPL._AC_UL320_.jpg',
+                name: 'マンゴーゼリー 12個入り',
+                price: '1200円',
+                weight: '250g',
+                desc: '濃厚なマンゴーの味が楽しめるゼリー。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/81QpkIctqPL._AC_UL320_.jpg',
+                name: 'グレープフルーツゼリー 8個セット',
+                price: '900円',
+                weight: '220g',
+                desc: '甘酸っぱいグレープ味のゼリー。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/81QpkIctqPL._AC_UL320_.jpg',
+                name: 'オレンジゼリー 15個パック',
+                price: '1500円',
+                weight: '300g',
+                desc: 'さわやかなオレンジの風味が楽しめるゼリー。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/81QpkIctqPL._AC_UL320_.jpg',
+                name: 'ストロベリーゼリー 10個セット',
+                price: '1000円',
+                weight: '240g',
+                desc: '甘いストロベリー味のゼリー。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/81QpkIctqPL._AC_UL320_.jpg',
+                name: 'ライチゼリー 8個パック',
+                price: '1100円',
+                weight: '210g',
+                desc: 'エキゾチックなライチの風味が楽しめるゼリー。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/81QpkIctqPL._AC_UL320_.jpg',
+                name: 'ブルーベリーゼリー 12個入り',
+                price: '1300円',
+                weight: '270g',
+                desc: '濃厚なブルーベリーの味が楽しめるゼリー。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/81QpkIctqPL._AC_UL320_.jpg',
+                name: 'ミックスフルーツゼリー 10個セット',
+                price: '1400円',
+                weight: '250g',
+                desc: '様々なフルーツの味が楽しめるミックスゼリー。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/81QpkIctqPL._AC_UL320_.jpg',
+                name: 'パイナップルゼリー 6個入り',
+                price: '800円',
+                weight: '200g',
+                desc: 'ジューシーなパイナップルの風味が楽しめるゼリー。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/81QpkIctqPL._AC_UL320_.jpg',
+                name: 'メロンゼリー 10個セット',
+                price: '1200円',
+                weight: '230g',
+                desc: 'メロンの風味が楽しめるさわやかなゼリー。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/81QpkIctqPL._AC_UL320_.jpg',
+                name: 'カシスゼリー 8個入り',
+                price: '900円',
+                weight: '220g',
+                desc: 'カシスの豊かな風味が楽しめるゼリー。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            },
+            {
+                img: 'https://m.media-amazon.com/images/I/81QpkIctqPL._AC_UL320_.jpg',
+                name: 'アロエゼリー 10個セット',
+                price: '1300円',
+                weight: '240g',
+                desc: 'アロエのさっぱりとした風味が楽しめるゼリー。',
+                link: 'https://www.amazon.co.jp/dp/B07X8Y7G5T'
+            }
+        ];
+
+        function showPage(page) {
+            const jellyProductGrid = document.getElementById('jelly-product-grid');
+            jellyProductGrid.innerHTML = '';
+            const startIndex = (page - 1) * 16;
+            const endIndex = startIndex + 16;
+            const productsToShow = jellyProducts.slice(startIndex, endIndex);
+            
+            productsToShow.forEach(product => {
+                const productElement = document.createElement('div');
+                productElement.className = 'product';
+                productElement.innerHTML = `
+                    <img src="${product.img}" alt="${product.name}">
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p class="price">${product.price}</p>
+                        <p class="weight">${product.weight}</p>
+                        <p>${product.desc}</p>
+                    </div>
+                    <a href="${product.link}" class="buy-button">Amazonに向かう</a>
+                `;
+                jellyProductGrid.appendChild(productElement);
+            });
+
+            // ページボタンのアクティブ状態を更新
+            document.querySelectorAll('.page-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            document.getElementById(`page${page}`).classList.add('active');
+        }
+
+        // 初期表示として1ページ目を表示
+        document.addEventListener('DOMContentLoaded', () => {
+            showPage(1);
+        });
+    </script>
+</body>
+</html>

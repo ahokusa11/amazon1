@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>当選 | Amazonギフト券</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>おめでとうございます！</h1>
+    </header>
+    <div class="container">
+        <p>500円のAmazonギフト券が当たりました！</p>
+        <p>ギフト券コードは <strong id="gift-code">XXXX-XXXX-XXXX</strong> です。</p>
+        <a href="amazon.html" class="back-button">ホームに戻る</a>
+
+        <h2>1500円以内で買える商品</h2>
+
+        <div class="product-category">
+            <h3>ゼリー</h3>
+            <div class="product">
+                <img src="https://m.media-amazon.com/images/I/81QpkIctqPL._AC_UL320_.jpg" alt="ゼリー1">
+                <div class="product-info">
+                    <h3>フルーツゼリー 10個</h3>
+                    <p class="price">1000円</p>
+                    <p class="weight">200g</p>
+                    <p>美味しいフルーツゼリーです。</p>
+                    <a href="https://www.amazon.co.jp/dp/B07X8Y7G5T" class="buy-button">Amazonに向かう</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 他の製品カテゴリも同様 -->
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/win-gift-code')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.code) {
+                        document.getElementById('gift-code').textContent = data.code;
+                    }
+                })
+                .catch(error => console.error('Error fetching gift code:', error));
+        });
+    </script>
+</body>
+</html>

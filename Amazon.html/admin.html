@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在庫管理 | Amazonギフト券</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>在庫管理</h1>
+    </header>
+    <div class="container">
+        <h2>Amazonギフト券コードの追加</h2>
+        <form id="stock-form">
+            <label for="code">ギフト券コード:</label>
+            <input type="text" id="code" name="code" required>
+            <label for="quantity">数量:</label>
+            <input type="number" id="quantity" name="quantity" min="1" required>
+            <button type="submit">追加</button>
+        </form>
+        <div id="stock-list">
+            <h3>現在の在庫</h3>
+            <ul id="code-list"></ul>
+        </div>
+    </div>
+    <script>
+        const stockForm = document.getElementById('stock-form');
+        const codeList = document.getElementById('code-list');
+    
+        stockForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const code = document.getElementById('code').value;
+            const quantity = parseInt(document.getElementById('quantity').value);
+    
+            fetch('http://localhost:3000/add-gift-code', {  // 環境に合わせてURLを調整
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ code, quantity }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('ギフト券コードが追加されました');
+                displayCodes();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    
+        function displayCodes() {
+            fetch('http://localhost:3000/gift-codes')  // 環境に合わせてURLを調整
+            .then(response => response.json())
+            .then(data => {
+                codeList.innerHTML = '';
+                data.forEach((code, index) => {
+                    const li = document.createElement('li');
+                    li.textContent = `${index + 1}. ${code.code} - 数量: ${code.quantity} - 当選: ${code.isWon ? 'Yes' : 'No'}`;
+                    codeList.appendChild(li);
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    
+        document.addEventListener('DOMContentLoaded', displayCodes);
+    </script>
+    
+    
+</body>
+</html>
